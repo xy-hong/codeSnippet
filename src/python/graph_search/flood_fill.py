@@ -16,7 +16,7 @@ class Solution:
         q.append({"row": sr, "col": sc})
 
         while len(q) > 0:
-            item = q.pop()
+            item = q.pop(0)
             row = item['row']
             col = item['col']
             image[row][col] = newColor
