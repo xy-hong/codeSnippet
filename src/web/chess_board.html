@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Board</title>
+</head>
+<body>
+    <div style="display: flex">
+        <div id="chess_board"></div>
+        <div id="menu" class="menu"></div>
+    </div>
+
+</body>
+<style>
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+
+    .row {
+        display: flex;
+    }
+
+    .cell {
+        width: 100px;
+        height: 100px;
+    }
+
+    .menu {
+        margin: 20px;
+        border: 1px solid gray;
+        width: 200px;
+        height: 400px;
+    }
+</style>
+<script>
+    // 可供选择的颜色
+    const colors = [
+        ["#b28964", "#eedab6"],
+        ['#edefd2', '#769757'],
+        ['#1e1e1e', '#2f76cb'],
+        ['#f99318', '#000000'],
+        ['#38485e', '#4bb983']
+
+    ]
+
+    // 根据颜色渲染棋盘
+    function render(index) {
+        
+        const color = colors[index]
+        console.log("render color board")
+        const board = document.querySelector("#chess_board")
+        board.innerHTML = ""
+        for (let i = 0; i < 8; i++) {
+            let colorIndex = i % 2
+            const row = document.createElement('div')
+            row.className = 'row'
+            for(let j=0; j < 8; j++) {
+                const cell = document.createElement('div')
+                //cell.style.top = i * 100 + 'px' 
+                //cell.style.left = j * 100 + 'px'
+                cell.style.backgroundColor = color[colorIndex]
+                colorIndex = (colorIndex +1) % 2
+                cell.className = 'cell'
+                row.appendChild(cell)
+            }
+            board.appendChild(row)
+        }
+    }
+
+    function renderMenu() {
+        const menu = document.querySelector('#menu')
+        const length = colors.length
+        for(let i=0; i<length; i++) {
+            const colorPattan = colors[i]
+            const div = `<div style="display: flex; padding: 5px" onclick="render(${i})">
+                    <div style="background-color:${colorPattan[0]}; width:40%; height:20px"></div>
+                    <div style="background-color:${colorPattan[1]}; width:40%; height:20px"></div>
+                </div>`
+            menu.innerHTML += div
+        }
+    }
+
+    // 默认渲染
+    render(0)
+    renderMenu()
+
+</script>
+</html>
