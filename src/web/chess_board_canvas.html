@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Board Canvas</title>
+</head>
+<body>
+    <canvas id="chess_board" width="800px" height="800px">There should display a chess board</canvas>
+</body>
+<style>
+    canvas {
+        border: 1px solid black;
+    }
+</style>
+<script>
+    const colors = ['white', 'black']
+    let index = 0
+    const board = document.getElementById('chess_board')
+    if(board.getContext) {
+        const context = board.getContext('2d')
+        for(let i=0; i<8; i++) {
+            for(let j=0; j<8; j++) {
+                context.fillStyle = colors[index%2]
+                context.fillRect(i*100, j*100, 100, 100)
+                index = (index+1)%2
+            }
+            index = (index+1)%2
+        }
+    }
+</script>
+</html>
